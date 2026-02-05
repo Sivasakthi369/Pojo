@@ -1,0 +1,151 @@
+import java.util.Scanner;
+
+public class BankApp {
+
+    public static void main(String[] args) {
+
+        Scanner obj = new Scanner(System.in);
+        Customer customer = new Customer();
+
+        System.out.println("----- KYC VERIFICATION -----");
+
+        System.out.print("Enter Name: ");
+        customer.setName(obj.nextLine());
+
+        System.out.print("Enter Age: ");
+        customer.setAge(obj.nextInt());
+        obj.nextLine();
+
+        System.out.print("Enter Phone: ");
+        customer.setPhone(obj.nextLine());
+
+        System.out.print("Enter Aadhaar: ");
+        customer.setAadhaar(obj.nextLine());
+
+        System.out.print("Enter PAN: ");
+        customer.setPan(obj.nextLine());
+
+        System.out.print("Enter Email: ");
+        customer.setEmail(obj.nextLine());
+
+        System.out.print("Set PIN: ");
+        String pin1 = obj.nextLine();
+
+        System.out.print("Confirm PIN: ");
+        String pin2 = obj.nextLine();
+
+        boolean valid = true;
+
+        if (customer.getName().isEmpty())
+            valid = false;
+
+        if (customer.getAge() < 18)
+            valid = false;
+
+        if (customer.getPhone().length() != 10)
+            valid = false;
+
+        if (customer.getAadhaar().length() != 12)
+            valid = false;
+
+        if (!customer.getEmail().contains("@"))
+            valid = false;
+
+        if (!pin1.equals(pin2))
+            valid = false;
+
+        if (valid) {
+            customer.setPin(pin1);
+            customer.setBalance(1000);
+            customer.setKycVerified(true);
+            System.out.println("KYC Verified. Account Created Successfully!");
+        } else {
+            System.out.println("KYC Failed.");
+            return;
+        }
+
+        System.out.println("\n----- LOGIN -----");
+
+        System.out.print("Enter Name: ");
+        String loginName = obj.nextLine();
+
+        System.out.print("Enter Phone: ");
+        String loginPhone = obj.nextLine();
+
+        if (!loginName.equals(customer.getName()) ||
+                !loginPhone.equals(customer.getPhone())) {
+            System.out.println("Invalid Login.");
+            return;
+        }
+
+        int attempts = 0;
+        boolean access = false;
+
+        while (attempts < 3) {
+
+            System.out.print("Enter PIN: ");
+            String loginPin = obj.nextLine();
+
+            if (loginPin.equals(customer.getPin())) {
+                access = true;
+                break;
+            } else {
+                attempts++;
+                System.out.println("Incorrect PIN");
+            }
+        }
+
+        if (!access) {
+            System.out.println("Account Locked.");
+            System.out.println("Thank you for banking with us.");
+            return;
+        }
+
+        int choice = 0;
+
+        while (choice != 4) {
+
+            System.out.println("\n1. Deposit");
+            System.out.println("2. Withdraw");
+            System.out.println("3. Balance");
+            System.out.println("4. Exit");
+            System.out.print("Enter choice: ");
+
+            choice = obj.nextInt();
+
+            if (choice == 1) {
+
+                System.out.print("Enter amount: ");
+                double deposit = obj.nextDouble();
+                customer.setBalance(customer.getBalance() + deposit);
+                System.out.println("Deposited Successfully.");
+
+            } else if (choice == 2) {
+
+                System.out.print("Enter amount: ");
+                double withdraw = obj.nextDouble();
+
+                if (customer.getBalance() - withdraw >= 1000) {
+                    customer.setBalance(customer.getBalance() - withdraw);
+                    System.out.println("Withdraw Successful.");
+                } else {
+                    System.out.println("Insufficient Balance.");
+                }
+
+            } else if (choice == 3) {
+
+                System.out.println("Balance: " + customer.getBalance());
+
+            } else if (choice == 4) {
+
+                System.out.println("Thank you for banking with us.");
+
+            } else {
+
+                System.out.println("Invalid Choice.");
+            }
+        }
+
+        obj.close();
+    }
+}
