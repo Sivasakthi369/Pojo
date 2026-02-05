@@ -1,0 +1,84 @@
+public class Customer {
+
+    private String name;
+    private int age;
+    private String phone;
+    private String aadhaar;
+    private String pan;
+    private String email;
+    private String pin;
+    private double balance;
+    private boolean kycVerified;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAadhaar() {
+        return aadhaar;
+    }
+
+    public void setAadhaar(String aadhaar) {
+        this.aadhaar = aadhaar;
+    }
+
+    public String getPan() {
+        return pan;
+    }
+
+    public void setPan(String pan) {
+        this.pan = pan;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPin() {
+        return pin;
+    }
+
+    public void setPin(String pin) {
+        this.pin = pin;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public boolean isKycVerified() {
+        return kycVerified;
+    }
+
+    public void setKycVerified(boolean kycVerified) {
+        this.kycVerified = kycVerified;
+    }
+}
